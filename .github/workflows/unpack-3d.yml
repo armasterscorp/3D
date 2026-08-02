@@ -1,0 +1,59 @@
+name: Unpack 3D.zip and create expanded branch
+
+on:
+  workflow_dispatch: {}
+
+jobs:
+  unpack:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Install unzip
+        run: sudo apt-get update && sudo apt-get install -y unzip
+
+      - name: Verify 3D.zip exists
+        run: |
+          echo "Listing repo root"
+          ls -la
+          if [ ! -f 3D.zip ]; then
+            echo "3D.zip not found in repo root" && exit 1
+          fi
+
+      - name: Unzip 3D.zip into expanded/
+        run: |
+          rm -rf expanded || true
+          mkdir expanded
+          unzip -o 3D.zip -d expanded
+          echo "Unzipped contents:" && ls -la expanded | sed -n '1,200p'
+
+      - name: Copy newly added apps/ into expanded tree
+        run: |
+          # Copy the apps directory (Direct-MX files we added) into the expanded tree so they exist as loose files
+          if [ -d apps ]; then
+            cp -R apps/* expanded/ || true
+          fi
+
+      - name: Commit expanded tree into new branch
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git checkout -b expanded-with-directmx || git checkout expanded-with-directmx
+          # Copy expanded content into repo working tree
+          shopt -s dotglob || true
+          cp -R expanded/* . || true
+          git add -A
+          if git diff --cached --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "chore: expand 3D.zip into repo and add Direct-MX files"
+            git push origin HEAD:expanded-with-directmx
+          fi
