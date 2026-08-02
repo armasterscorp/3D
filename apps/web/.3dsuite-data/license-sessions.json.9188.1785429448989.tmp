@@ -1,0 +1,18 @@
+{
+  "f6cff46fb286ab2e": {
+    "licenseId": "f6cff46fb286ab2e",
+    "sessionId": "b267767468641b07d1f25f6f51691f080fc53e898e6cade8",
+    "customer": "My Test License",
+    "activatedAt": 1785362157,
+    "lastSeenAt": 1785402515,
+    "expiresAt": 1787951943
+  },
+  "b2c6e4317753bb42": {
+    "licenseId": "b2c6e4317753bb42",
+    "sessionId": "b397f4083453ae572294026157bd07b022aa3902bbed2f69",
+    "customer": "Admin",
+    "activatedAt": 1785424906,
+    "lastSeenAt": 1785429448,
+    "expiresAt": 1790602750
+  }
+}

@@ -1,0 +1,29 @@
+
+> @3d-suite/api@0.1.0 build
+> next build
+
+  ▲ Next.js 14.2.35
+
+   Creating an optimized production build ...
+ ✓ Compiled successfully
+   Linting and checking validity of types ...
+Failed to compile.
+
+./src/app/api/microsoft/send/route.ts:1959:20
+Type error: Function declarations are not allowed inside blocks in strict mode when targeting 'ES5'. Modules are automatically in strict mode.
+
+[0m [90m 1957 |[39m           [36mconst[39m removedAccountIds [33m=[39m [36mnew[39m [33mSet[39m[33m<[39m[33mstring[39m[33m>[39m()[33m;[39m[0m
+[0m [90m 1958 |[39m[0m
+[0m[31m[1m>[22m[39m[90m 1959 |[39m           [36mfunction[39m nextAccount()[33m:[39m [33mSmtpPlanAccount[39m [33m|[39m [36mnull[39m {[0m
+[0m [90m      |[39m                    [31m[1m^[22m[39m[0m
+[0m [90m 1960 |[39m             [36mif[39m ([33m![39mplan[33m.[39mlength) [36mreturn[39m [36mnull[39m[33m;[39m[0m
+[0m [90m 1961 |[39m[0m
+[0m [90m 1962 |[39m             [36mif[39m ([33m![39mrotateAccounts) {[0m
+Next.js build worker exited with code: 1 and signal: null
+npm error Lifecycle script `build` failed with error:
+npm error code 1
+npm error path C:\3DSuite\app\apps\api
+npm error workspace @3d-suite/api@0.1.0
+npm error location C:\3DSuite\app\apps\api
+npm error command failed
+npm error command C:\WINDOWS\system32\cmd.exe /d /s /c next build

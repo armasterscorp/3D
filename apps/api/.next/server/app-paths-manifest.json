@@ -1,0 +1,4 @@
+{
+  "/api/adobe/browser/status/route": "app/api/adobe/browser/status/route.js",
+  "/api/browser-proxy/route": "app/api/browser-proxy/route.js"
+}
