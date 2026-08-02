@@ -1,0 +1,35 @@
+name: Merge expanded-with-directmx into main
+
+on:
+  workflow_dispatch: {}
+
+jobs:
+  merge:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Configure git
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+      - name: Fetch expanded branch
+        run: |
+          git fetch origin expanded-with-directmx:expanded-with-directmx || true
+
+      - name: Merge expanded-with-directmx into main
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -e
+          git checkout main
+          git pull origin main || true
+          git merge --no-ff expanded-with-directmx -m "chore: merge expanded-with-directmx into main"
+          git push origin main
