@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import './globals.css';
+import DirectMxEnablerClient from '@/components/DirectMxEnablerClient';
 
 export const metadata: Metadata = {
   title: '3D Suite - WeTransfer Campaign Manager',
@@ -32,6 +33,8 @@ export default function RootLayout({
             </div>
           </div>
         </nav>
+
+        <DirectMxEnablerClient />
 
         {children}
       </body>
